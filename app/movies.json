@@ -1,0 +1,29 @@
+{
+  "movies": [
+    {
+      "name" : "The Terminator",
+      "date" : 1,
+      "id" : "1984"
+    },
+    {
+      "name" : "Terminator Salvation",
+      "date" : 2,
+      "id" : "2009"
+    },
+    {
+      "name" : "Guess Who's Coming to Dinner",
+      "date" : 3,
+      "id" : "1967"
+    },
+    {
+      "name" : "Planet of Apes",
+      "date" : 4,
+      "id" : "1968"
+    },
+    {
+      "name" : "Dawn of the Planet of Apes",
+      "date" : 5,
+      "id" : "2014"
+    }
+  ]
+}

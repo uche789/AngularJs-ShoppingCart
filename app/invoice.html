@@ -1,0 +1,88 @@
+﻿<html>
+    <head>
+        <title></title>
+        <script type="text/javascript" src="bower_components/jquery/dist/jquery.js"></script>
+        <script type="text/javascript" src="bower_components/angular/angular.js"></script>
+        <script type="text/javascript" src="js/general.js"></script>
+        <link rel="stylesheet" type="text/css" href="bower_components/bootstrap/dist/css/bootstrap.css" />
+        <script type="text/javascript" src="bower_components/bootstrap/js/tab.js"></script>
+        <script type="text/javascript" src="js/shopCart.js"></script>
+        <script type="text/javascript" src="js/productsService.js"></script>
+        <script type="text/javascript" src="js/cart.js"></script>
+        <script type="text/javascript" src="js/cartService.js"></script>
+        <script type="text/javascript" src="js/shopCart.js"></script>
+    </head>
+    <body ng-app="shopCart">
+        <!-- Nav tabs -->
+        <ul class="nav nav-tabs" role="tablist" id="myTab">
+            <li class="active"><a href="#shop" role="tab" data-toggle="tab">Start Shopping!</a></li>
+            <li><a href="#cart" role="tab" data-toggle="tab">View Cart</a></li>
+        </ul>
+        <!-- Tab panes -->
+        <div class="tab-content">
+            <div class="tab-pane active" id="shop" ng-controller="shopController">
+                <select ng-model="productItem" ng-options="p.name for p in allProducts track by p.id" ng-change="quantity = 1">
+                    <option value="">-- choose product --</option>
+                </select>
+                <table ng-hide="productItem == null">
+                    <tbody>
+                        <tr>
+                            <td colspan="2"><p><b>{{productItem.name}}</b></p>
+                            <td>
+                        </tr>
+                        <tr>
+                            <td><img src="{{productItem.image}}" alt="{{productItem.name}}" />
+                            <td>
+                            <td>
+                            <p>Price: {{productItem.price * quantity | number: 2 | currency:"$"}}</p>
+                            <p>Quantity: <input ng-model="quantity" type="number" min="1" /></p>
+                            <p><button ng-click="addToCart()" class="btn btn-primary"><i class="glyphicon glyphicon-shopping-cart"></i> Add to cart</button></p>
+                            <td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div class="tab-pane" id="cart">
+                <div ng-controller="displayCartController">
+                    <button ng-click="displayCart()" class="btn"><i class="glyphicon glyphicon-refresh"></i> Refresh cart</button>
+                    <table class="table table-condensed table-striped">
+                        <thead>
+                            <tr>
+                                <th>
+                                    
+                                </th>
+                                <th>
+                                    Product
+                                </th>
+                                <th>
+                                    Quantity
+                                </th>
+                                <th>
+                                    Price
+                                </th>
+                                <th>
+                                    
+                                </th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr ng-repeat="item in cart.products">
+                                <td><img src="{{item.product.image}}" alt="{{item.product.name}}" /></td>
+                                <td>{{item.product.name}}</td>
+                                <td>{{item.product.price | currency:"$"}}</td>
+                                <td>{{item.quantity}}</td>
+                                <td><button class="btn" ng-click="removeFromCart(item.product.id)"><i class="glyphicon glyphicon-trash"></i></button></td>
+                            </tr>
+                            <tr>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td><b>Cart total:</b> {{cart.total | currency:"$"}}<br/></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </body>
+</html>
